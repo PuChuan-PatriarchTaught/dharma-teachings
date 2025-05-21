@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>法寶開示全集</title>
+    <style>
+        :root {
+            --primary-color: #5a8f5b;
+            --secondary-color: #8B4513;
+        }
+        body {
+            font-family: "Microsoft JhengHei", Arial, sans-serif;
+            background-color: #f8f4e8;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            -webkit-text-size-adjust: 100%;
+            touch-action: manipulation;
+        }
+        h1 {
+            color: var(--secondary-color);
+            font-size: 1.8rem;
+            margin: 0 0 15px;
+            font-weight: normal;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+        .category-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .category-btn {
+            width: 100%;
+            margin: 15px 0;
+            padding: 18px;
+            font-size: 1.2rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .category-btn:active {
+            transform: scale(0.98);
+            background-color: #4a7a4a;
+        }
+        .pdf-list {
+            display: none;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .pdf-item {
+            background: white;
+            margin: 12px 0;
+            padding: 16px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .pdf-item:active {
+            transform: translateX(3px);
+        }
+        .pdf-title {
+            font-weight: bold;
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+        }
+        .back-btn {
+            width: 100px;
+            margin: 30px auto;
+            padding: 10px;
+            background-color: #d1c7b7;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="main-menu">
+        <h1>法寶開示全集</h1>
+        <p class="subtitle">點擊下方按鈕選擇分類。內容僅供線上瀏覽</p>
+        
+        <div class="category-container">
+            <button class="category-btn" onclick="showCategory('ganlu')">
+                甘露法語（7篇）
+            </button>
+            
+            <button class="category-btn" onclick="showCategory('zushi')">
+                祖師開示（4篇）
+            </button>
+        </div>
+    </div>
+    
+    <!-- 甘露法語PDF列表 -->
+    <div id="ganlu-list" class="pdf-list">
+        <div class="pdf-item" onclick="openPDF('甘露法語第一冊：基礎開示', '1cjMnvUFCbOQLYxPMrasVfk0QPNok9m8t')">
+            <div class="pdf-title">第一冊：基礎開示</div>
+        </div>
+        <div class="pdf-item" onclick="openPDF('甘露法語第二冊：實修指引', '14QhKkhlsgWxaSetTLn9cjVNgFDv6XjWy')">
+            <div class="pdf-title">第二冊：實修指引</div>
+        </div>
+        <div class="pdf-item" onclick="openPDF('甘露法語第三冊：問答集錦', '1thqDOEin7pKZkNzFMRQIbUPZTQgF3c9N')">
+            <div class="pdf-title">第三冊：問答集錦</div>
+        </div>
+        <div class="pdf-item" onclick="openPDF('甘露法語第四冊：專題講授', '1anCMBqFA42QrB2vlXmfEqDYVk-annJw9')">
+            <div class="pdf-title">第四冊：專題講授</div>
+        </div>
+        <div class="pdf-item" onclick="openPDF('甘露法語第五冊：密意淺釋', '1n0wHZkRq7zsdm0UabSHfqKr24Ipm0J27')">
+            <div class="pdf-title">第五冊：密意淺釋</div>
+        </div>
+        <div class="pdf-item" onclick="openPDF('甘露法語第六冊：年度精華', '1kJWxaoHqIqHJl3Gdn_cO3bgGbuaUuI3K')">
+            <div class="pdf-title">第六冊：年度精華</div>
+        </div>
+        <div class="pdf-item" onclick="openPDF('甘露法語第七冊：圓滿篇', '1vA9Cq1Evqy_WVNsCWJNAlGm7bVluozKD')">
+            <div class="pdf-title">第七冊：圓滿篇</div>
+        </div>
+        <button class="back-btn" onclick="backToMain()">返回</button>
+    </div>
+    
+    <!-- 祖師開示PDF列表 -->
+    <div id="zushi-list" class="pdf-list">
+        <div class="pdf-item" onclick="openPDF('01 隨佛修學淨三業', '1CtNLMG1byrMA-NtLQO_-SCI-YYVFydY9')">
+            <div class="pdf-title">01 隨佛修學淨三業</div>
+        </div>
+        <div class="pdf-item" onclick="openPDF('02 吃苦了苦', '1pm1Bn24GtpUakLjF-qMZbngMY87AUwkW')">
+            <div class="pdf-title">02 吃苦了苦</div>
+        </div>
+        <div class="pdf-item" onclick="openPDF('03 正思惟', '15W67xlxRs02bfn1B_pGBRNoLFBXdGXO1')">
+            <div class="pdf-title">03 正思惟</div>
+        </div>
+        <div class="pdf-item" onclick="openPDF('04 皈依三寶', '16FSBD6rKZibMuTUdv1Jh83ge4zYi6Qa5')">
+            <div class="pdf-title">04 皈依三寶</div>
+        </div>
+        <button class="back-btn" onclick="backToMain()">返回</button>
+    </div>
+
+    <script>
+        // 顯示分類下的PDF列表
+        function showCategory(category) {
+            document.getElementById('main-menu').style.display = 'none';
+            document.getElementById(category + '-list').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+        
+        // 返回主目錄
+        function backToMain() {
+            document.querySelectorAll('.pdf-list').forEach(el => {
+                el.style.display = 'none';
+            });
+            document.getElementById('main-menu').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+        
+        // 開啟PDF預覽
+        function openPDF(title, fileId) {
+            const url = `https://drive.google.com/file/d/${fileId}/preview?rm=minimal&toolbar=0`;
+            window.open(url, '_blank');
+        }
+        
+        // 防下載保護
+        document.addEventListener('contextmenu', e => e.preventDefault());
+    </script>
+</body>
+</html>
