@@ -85,9 +85,28 @@
             font-size: 1rem;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
+        /* 關閉按鈕樣式 */
+        .close-btn {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            z-index: 1000;
+            display: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
+    <!-- 懸浮關閉按鈕 -->
+    <button class="close-btn" id="closeBtn">×</button>
+
     <div id="main-menu">
         <h1>開山祖師-甘露法語及開示</h1>
         <p class="subtitle">點擊下方按鈕選擇分類。內容僅供線上瀏覽</p>
@@ -147,6 +166,34 @@
     </div>
 
     <script>
+        // 全局變量記錄彈窗
+        let pdfWindow = null;
+
+        // 顯示PDF預覽（精簡界面）
+        function openPDF(title, fileId) {
+            // 顯示關閉按鈕
+            document.getElementById('closeBtn').style.display = 'block';
+            
+            // 強制隱藏所有控制元素
+            const url = `https://drive.google.com/file/d/${fileId}/preview?rm=minimal&toolbar=0&navpanes=0&scrollbar=0`;
+            pdfWindow = window.open(url, '_blank', 'width=800,height=600');
+            
+            // 聚焦到新視窗（避免被攔截）
+            if (pdfWindow) {
+                pdfWindow.focus();
+            } else {
+                alert('彈窗被瀏覽器攔截，請允許彈窗後重試');
+            }
+        }
+
+        // 關閉PDF視窗
+        document.getElementById('closeBtn').onclick = function() {
+            if (pdfWindow && !pdfWindow.closed) {
+                pdfWindow.close();
+            }
+            this.style.display = 'none';
+        };
+
         // 顯示分類下的PDF列表
         function showCategory(category) {
             document.getElementById('main-menu').style.display = 'none';
@@ -161,12 +208,6 @@
             });
             document.getElementById('main-menu').style.display = 'block';
             window.scrollTo(0, 0);
-        }
-        
-        // 開啟PDF預覽
-        function openPDF(title, fileId) {
-            const url = `https://drive.google.com/file/d/${fileId}/preview?rm=minimal&toolbar=0`;
-            window.open(url, '_blank');
         }
         
         // 防下載保護
